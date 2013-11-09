@@ -1,13 +1,104 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-</style>
-<body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://d3js.org/topojson.v1.min.js"></script>
-Hi!
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Homepage </title>
+        <link rel="stylesheet" href="dist/css/bootstrap.css"  type="text/css"/>
+        <link href="carousel.css" rel="stylesheet">
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+    </head>
+    <body>
+
+<!-- Nav Bar    ================================================== -->      
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Bronique</a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Brad's TODOs <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Take Monique out</a></li>
+                    <li><a href="#">Kiss her</a></li>
+                    <li><a href="#">Tickle her Petunia</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header"></li>
+                    <li><a href="#">Do her</a></li>
+                    <li><a href="#">Snuggle Her</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+<!-- End Nav Bar    ================================================== -->    
+
+  <!-- Carousel    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+      </ol>
+
+      <div class="carousel-inner">
+        <div class="item active">
+          <img  src ="/images/ph1.jpg" alt="First slide">
+          
+            <div class="carousel-caption">
+              <h1>You want a moustache</h1>
+              <p>You got a moustache</p>
+              <p><a class="btn btn-lg btn-primary" href="http://us.movember.com/mospace/3890133" role="button">Donate</a></p>
+            </div>
+          
+        </div>
+        <div class="item">
+          <img src ="/images/ph2.jpg" alt="Second slide" >
+          
+            <div class="carousel-caption">
+              <h1>Don't be scared.</h1>
+              <p>Monique's coming for ya.</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Watch out</a></p>
+            </div>
+          
+        </div>
+      </div>
+
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+    <!-- /.carousel -->
 
 
-</body>
+
+        <div class="container">
+
+          <div class="hero-unit">
+            <h1>stuff!</h1>
+              <p>Cras justo odio, dapibus ac ftellus ac cursus commodo, tortor justo sit amet risus.</p>
+              <a href="#" class="btn btn-large btn-success">Check it out!</a>
+
+        <script src="dist/js/bootstrap.js"></script>
+      </div></div>
+    </body>
+</html>
 
 
