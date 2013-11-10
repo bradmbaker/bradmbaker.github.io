@@ -1,0 +1,35 @@
+
+path {
+  fill: none;
+  stroke: #000;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.points{
+ fill: #fff;
+  stroke: red;
+  stroke-width: 2px;
+}
+
+
+.arc {
+/*  fill: none;*/
+  stroke: red;
+  stroke-width: 3px;
+  stroke-linecap: round;
+}
+.route {
+  fill: none;
+  stroke: red;
+  stroke-width: 3px;
+}
+
+
+
+/*.major_road { stroke: #776; }*/
+/*.minor_road { stroke: #ccb; }*/
+/*.highway { stroke: #f39; stroke-width: 1.5px; }*/
+/*.rail { stroke: #7de; }*/
+.buildings path { stroke: none; fill: black; }
+
+

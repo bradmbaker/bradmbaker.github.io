@@ -6,7 +6,10 @@
         <link rel="stylesheet" href="dist/css/bootstrap.css"  type="text/css"/>
         <link href="carousel.css" rel="stylesheet">
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-
+        <script src="packages/url.min.js"></script>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="http://d3js.org/d3.geo.tile.v0.min.js"></script>
+        <script src="about/sf_map.js"></script>
     </head>
     <body>
     <div class="navbar-wrapper">
@@ -53,8 +56,28 @@
 
           <div class="hero-unit">
             <h1>stuff!</h1>
-              <p>Cras justo odio, dapibus ac ftellus ac cursus commodo, tortor justo sit amet risus.</p>
-              <a href="/" class="btn btn-large btn-success">Go Home!</a>
+              <p id="location_text">Check out your Fsq history.</p>
+              <a class="btn btn-large btn-success" onclick="redirectFS()" >Do It!</a>
+              <script> function redirectFS()
+                  {window.location = "https://foursquare.com/oauth2/authenticate?client_id=5FCNRKPVIF2QKIETHKFAEZGUF5RG2DFKBMGT4GUJL4XVLIIU&response_type=token&redirect_uri=http://localhost:8000/about.html"; }
+                  urlString = $.url();
+                  newToken = window.url("#access_token", urlString);
+                  if(newToken == null){
+                     console.log("empty"); 
+                  }
+                  else {
+                     $.getJSON("https://api.foursquare.com/v2/users/self/checkins?v=20131110&oauth_token=" + newToken,
+                     function(data){checkinHistory = data["response"];
+                        makeMap(checkinHistory);       
+                       }
+                     )
+                     
+                     
+
+                 } 
+           
+              </script>
+              
 
 
 
