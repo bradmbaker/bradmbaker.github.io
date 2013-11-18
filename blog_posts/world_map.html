@@ -41,12 +41,12 @@ body {
 </style>
 <head>
         <title> World Map</title>
-        <link rel="stylesheet" href="dist/css/bootstrap.css"  type="text/css"/>
+        <link rel="stylesheet" href="../dist/css/bootstrap.css"  type="text/css"/>
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-        <script src="dist/js/bootstrap.js"></script>
+        <script src="../dist/js/bootstrap.js"></script>
         <script>
           $(function() {
-            $(".navbar-wrapper").load("nav.html");
+            $(".navbar-wrapper").load("../nav.html");
           });
         </script>
 </head>
@@ -86,7 +86,7 @@ svg.append("defs").append("path")
     .attr("id", "sphere")
     .attr("d", path);
 */
-d3.csv("/data/all_points.csv", function(error,dt) {
+d3.csv("data/all_points.csv", function(error,dt) {
     var point = svg.append("g")
                .attr("class","points")
                .selectAll("g")
@@ -119,7 +119,7 @@ svg.append("path")
     .attr("class", "graticule")
     .attr("d", path);
 */
-d3.json("/map_jsons/world-50m.json", function(error, world) {
+d3.json("map_jsons/world-50m.json", function(error, world) {
 /*  
     svg.insert("path", ".graticule")
       .datum(topojson.feature(world, world.objects.land))
