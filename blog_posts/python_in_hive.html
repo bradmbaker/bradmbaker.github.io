@@ -65,7 +65,12 @@ Then the final step is to add the file and run the query.
 select transform(text_column, unique_id, created_timestamp)
 using has_cjk_characters.py 
 as (has_cjk_characters, unique_id, created_timestamp)
-from great_table;
+from (
+  select *
+  from great_table
+) a
+
+;
 </pre></code>
 
 And Voila, there you have, a transformmed column. This shouldn't add any noticeable decline in performace by adding this beyond the select.
