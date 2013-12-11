@@ -62,14 +62,18 @@ Then the final step is to add the file and run the query.
 
 <pre><code> add file file_path/has_cjk_characters.py;
 
-select transform(text_column, unique_id, created_timestamp)
-using has_cjk_characters.py 
-as (has_cjk_characters, unique_id, created_timestamp)
+select id, name2 as name, locale, name as cjk
 from (
-  select *
-  from great_table
-) a
-
+      select
+      transform (name, name2, id, locale)
+      using 'python has_cjk_characters.py' as (name, name2, id, locale)
+      from
+      (select name, name as name2, id, locale
+      from great_table
+      where name is not null
+      ) xx
+) xxx
+where hosting_id is not null
 ;
 </pre></code>
 
