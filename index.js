@@ -21,14 +21,12 @@ $( document ).ready(function() {
       
       // get the file name
       var file_name = v
-      console.log(file_name)
       var div_id = file_name.replace(".md","")
-      console.log(div_id)
+
       // add a blog-post div
       $(".blog-main").prepend('<div id="' + div_id + '" class="blog-post"></div>')
       // read in each markdown file
       $.get("markdown/" + file_name, function( data ) {
-        console.log(file_name)
         // convert it to HTML
         html_content = markdown.toHTML( data.toString());
         // give the appropriate classes and convert soundcloud links to players
