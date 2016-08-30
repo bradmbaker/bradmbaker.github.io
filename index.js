@@ -15,11 +15,12 @@ $( document ).ready(function() {
   $(".top-nav").load("nav.html");
   
   // read markdown directory
-  $.get("/markdown/", function(data) {
+  $.get("./markdown/", function(data) {
     // loop through each file
-    $(data).find("li > a").sort(markdown_comparer).each(function(){
+    $.each(data.split('\n').sort(),function(i, v){
+      
       // get the file name
-      var file_name = $( this ).attr("href")
+      var file_name = v
       var div_id = file_name.replace(".md","")
       // add a blog-post div
       $(".blog-main").prepend('<div id="' + div_id + '" class="blog-post"></div>')
