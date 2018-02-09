@@ -1,12 +1,10 @@
-Collection Page Code:
-
 <style>
 /* styling for large devices */
 @media only screen and (min-device-width : 880px)  {
 
   /* set the gallery to overflow to the side */
   .sqs-gallery {
-    overflow: scroll;
+    overflow-x: auto;
   }
   /* make all text + logo invisible */
   p, #logo {
@@ -170,14 +168,15 @@ $( window ).on("load", function() {
       images = $(".sqs-wrapper > img");
       $(".sqs-gallery-container").remove();
       images.each(function( i, v ) {
-	      img_src = $(v).attr("src").replace(/format\=[0-9]+w/, ("format=" + image_quality));
-	      $(".sqs-block-content").append("<img src='" + img_src + "' style='width:" + image_width + "px;'></img>");
+        img_src = $(v).attr("src").replace(/format\=[0-9]+w/, ("format=" + image_quality));
+        $(".sqs-block-content").append("<img src='" + img_src + "' style='width:" + image_width + "px;'></img>");
       });
       $(".sqs-block-content > img").fadeTo(500, 1); 
     }, 3000);
     /* end small screen tweaks */
     return; 
   }
+
   /* set a 250ms timeout due to squarespace inconsistences */
   setTimeout(function(){
   $(".navigation").remove()
@@ -202,16 +201,20 @@ $( window ).on("load", function() {
   /* this snippet takes the credits, flips them vertically 
    and puts them in the header */
   $("#siteHeader").append( $( "<div class='vertical-text'>" )   );
-  $(".vertical-text").width(browser_height - 80);
 
   $(".vertical-text").append($( "<table>" ));
   $(credits).each(function(k, v) {
     $(".vertical-text > table").append($('<td class="text-box-' + k + '">').append($(v).append($("</td>"))))
   })
   $(".vertical-text").append($( "</table>" ));
-
-  $(".vertical-text").height(vertical_text_width);
-  $(".vertical-text").css("left", -1 * (browser_height - 80));
+  
+  //since jquery supports multiple css values
+  //refactored the code
+  $(".vertical-text").css({
+    'width'   : browser_height - 80,
+    'height'  : vertical_text_width,
+    'left'    : -1 * (browser_height - 80)
+  });
 
   /* rotate header image and put in vertical table */
   header_img = $("#siteHeader > a");
@@ -239,3 +242,9 @@ $( window ).on("load", function() {
 });
 
 </script>
+
+<style>
+  #main { 
+    width: auto 
+  }
+</style>
