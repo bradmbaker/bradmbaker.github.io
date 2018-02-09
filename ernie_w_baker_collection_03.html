@@ -1,0 +1,241 @@
+Collection Page Code:
+
+<style>
+/* styling for large devices */
+@media only screen and (min-device-width : 880px)  {
+
+  /* set the gallery to overflow to the side */
+  .sqs-gallery {
+    overflow: scroll;
+  }
+  /* make all text + logo invisible */
+  p, #logo {
+    opacity: 0;
+  }
+   
+  /* vertical text for credits */
+  .vertical-text {
+    transform: rotate(270deg);
+    transform-origin: 100% 0%;
+      position: absolute;
+  } 
+
+  /* bolden the emphasized vertical text */
+  td > p > strong > em, strong > em, p > strong > em, strong {
+    color: #242628;
+  }
+    
+   /* add padding to the side of the images */
+   /* make the cursor not switch to click on images */
+  .sqs-gallery-design-strip-slide {
+     padding-left: 3px;
+     padding-right: 3px;
+     opacity: 0;
+     cursor: auto !important;
+   }
+
+  /* set gallery to top left and remove margin at bottom of page and put it behind the mobile nav*/
+  #page {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    z-index: -1;
+  }
+
+
+
+  /* set gallery to start at 0 on the left instead of negative*/
+  .sqs-wrapper {
+    left: 0;
+  }
+
+  /* set nav background to clear so the menu doesn't have a white box */
+  body #canvas {
+    background-color: rgba(0,0,0,0);
+  }
+
+  /* remove padding at the bottom */
+  .gallery-block {
+    padding-bottom: 0;
+  }
+
+  
+  /* let the logo show and make it narrow af*/
+  #header {
+    z-index: 10000;
+    width: 0px !important
+  }
+
+  /* set nav background to clear so the menu doesn't have a white box */
+  body #canvas {
+    background-color: rgba(0,0,0,0);
+  }
+
+  /* set footer to be invisible */
+  #footer {
+    opacity: 0;
+  }
+  
+  .navigation {
+    opacity: 0;
+  } 
+    
+  /* lock the page height */
+  body {
+    overflow: hidden;
+  }
+   
+   /* shift up the menu */
+  .wrapper  {
+    padding-top: 30px !important;
+    padding-bottom: 100px !important;
+  }
+    
+  main {
+    margin-left: 0px !important;
+  }
+  /* make the slide show have no padding */
+  main > .wrapper {
+    padding-top: 80px !important;
+    /* room for the bottom padding is created in JS below */
+    /* search for 160 to find it as 160 = 80 * 2 */
+    padding-bottom: 0px !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+  }
+/* end big screen styles */
+}
+
+/* let the logo overflow */
+@media screen and (min-width: 641px) {
+  header {
+   overflow: visible !important; 
+  }
+}
+
+/* mobile only styles */
+/* clean up the mobile nav */
+#mobileMenuLink {
+  background-color: rgba(0,0,0,0);
+  border-bottom-color: rgba(0,0,0,0);
+}
+
+@media screen and (max-width: 880px) {
+  .sqs-col-12 > div:nth-child(2) {
+   opacity: 0;
+  }
+  #footer {
+    opacity: 0;
+  }
+}
+ 
+/* make the gallery transparent */
+.sqs-gallery-design-strip-slide {
+  opacity: 0;
+}
+
+</style>
+
+
+
+<script type="text/javascript">  
+/* constants for altering */
+/* number of images in gallery */
+n_images = 21;
+/* this is squarespace image quality. options are 500w, 750w, 1000w, 2500w */
+image_quality = "1000w";
+
+$( document ).ready(function() {
+    /* remove the footer */
+    $("#footer").remove()  
+    $("#page").css("margin-top", 0);
+    credits = $("p");
+    vertical_text_width= $("p").height();
+});
+
+
+
+/* don't run this JS until the whole page has loaded */
+$( window ).on("load", function() {
+  /* if small screen only do mobile changes */
+  if ( $(window).width() < 880) { 
+    /* remove the collection info for small screens */
+    $(".sqs-col-12 > div:nth-child(2)").remove()
+    
+    /* turn the gallery into a vertical scroll*/
+    setTimeout(function(){
+      image_width = screen.width - 16;
+      images = $(".sqs-wrapper > img");
+      $(".sqs-gallery-container").remove();
+      images.each(function( i, v ) {
+	      img_src = $(v).attr("src").replace(/format\=[0-9]+w/, ("format=" + image_quality));
+	      $(".sqs-block-content").append("<img src='" + img_src + "' style='width:" + image_width + "px;'></img>");
+      });
+      $(".sqs-block-content > img").fadeTo(500, 1); 
+    }, 3000);
+    /* end small screen tweaks */
+    return; 
+  }
+  /* set a 250ms timeout due to squarespace inconsistences */
+  setTimeout(function(){
+  $(".navigation").remove()
+  browser_height = $(window).height();
+  
+  /* for mobile, remove padding at the top */
+  $("div .gallery-block").attr("style", "padding-top: 0px !important; padding-bottom: 0px !important;");
+
+  /* remove weird padding div and put the gallery back in */
+  //gallery = $(".sqs-gallery-container");
+  //gallery_height = gallery.height();
+  //$(".sqs-block-content").remove();
+  //$(".sqs-block").append(gallery);
+
+  /* resize the gallery */
+  $(".sqs-gallery-container").height(browser_height - 80);
+
+   /* reveal the cleaned up slide show */
+  $(".sqs-gallery-design-strip-slide").fadeTo(500, 1);
+  $(".sqs-block").append(credits);
+  
+  /* this snippet takes the credits, flips them vertically 
+   and puts them in the header */
+  $("#siteHeader").append( $( "<div class='vertical-text'>" )   );
+  $(".vertical-text").width(browser_height - 80);
+
+  $(".vertical-text").append($( "<table>" ));
+  $(credits).each(function(k, v) {
+    $(".vertical-text > table").append($('<td class="text-box-' + k + '">').append($(v).append($("</td>"))))
+  })
+  $(".vertical-text").append($( "</table>" ));
+
+  $(".vertical-text").height(vertical_text_width);
+  $(".vertical-text").css("left", -1 * (browser_height - 80));
+
+  /* rotate header image and put in vertical table */
+  header_img = $("#siteHeader > a");
+  $("#siteHeader > a").remove();
+  $(".vertical-text > table").append($('<td class="vertical-logo">').append($(header_img).append($("</td>"))));
+  $(".vertical-text > table > td").css("width", "20%");
+  $(".vertical-text > table > .text-box-2").css("width", "30%");
+  $(".vertical-text > table > .vertical-logo").css("width", "30%");
+  $(".vertical-text > table > .vertical-logo > a").css("float", "right");
+  title_margin = $(".vertical-text > table > td > p").first().css("margin-top");
+  $(".vertical-text > table > .vertical-logo").css("padding-top", title_margin);
+  
+  /* after switching to vertical, make text + logo visible */
+  //  $("p, #logo").css("opacity", 1);
+  $("p, #logo").fadeTo(500, 1)
+
+    
+    setTimeout(function(){  
+    /* remove infinite scroll */
+    scroll_width = (6 + $(".sqs-wrapper > .loaded:nth-child(3)").width()) * n_images;
+    $(".sqs-wrapper").width(scroll_width + 200);
+    }, 2500);
+
+  }, 500);
+});
+
+</script>
